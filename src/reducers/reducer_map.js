@@ -2,21 +2,21 @@
 import { LEFT_CLICK, RIGHT_CLICK } from "../actions";
 import { nestedArray } from "../helpers";
 
-let initialState = populateNestedArray(nestedArray(10, 10));
+let initialState = populateNestedArray(nestedArray(10, 10), 19, 10);
 
 export default function(state = initialState, action) {
   if (action.payload) return action.payload;
   return state;
 }
 
-function populateNestedArray(nestedArray, bombcount = 10) {
+function populateNestedArray(nestedArray, val, count) {
   let rows = nestedArray.length;
   let cols = nestedArray[0].length;
-  while (bombcount) {
-    bombcount--;
+  while (count) {
+    count--;
     let y = floorRand(rows);
     let x = floorRand(cols);
-    !nestedArray[y][x] ? (nestedArray[y][x] = 19) : bombcount++;
+    !nestedArray[y][x] ? (nestedArray[y][x] = val) : count++;
   }
   return nestedArray;
 }
