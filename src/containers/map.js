@@ -33,6 +33,7 @@ class Map extends Component {
 }
 
 function mapStateToProps({ theMap }) {
+  console.log(theMap, "MAP");
   return { theMap };
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "minesweeper",
-  "homepage": "http://learncodefromjohn.github.io/minesweeper",
+  "homepage": "http://learncodefromjohn.github.io/MineSweeper",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
