@@ -10,7 +10,7 @@ class App extends Component {
           <br />
           <Map className="map" />
         </div>
-        <p>How to play minesweeper:</p>
+        <p>How to play minesweeper: (Play on Chrome)</p>
         <p>1) The goal of the game is to NOT click any bombs</p>
         <p>
           2) Each number tells you how many bombs are adjacent to the "clicked"
