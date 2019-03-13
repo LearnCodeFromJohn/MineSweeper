@@ -14,7 +14,7 @@ class Cell extends Component {
     // let { value } = this.props;
   }
   handleClick() {
-    this.setState({ clicked: true });
+    this.setState({ clicked: false });
   }
   onContextMenu(e) {}
   render() {
@@ -51,7 +51,7 @@ class Cell extends Component {
         onClick={this.handleClick.bind(this)}
         onContextMenu={this.onContextMenu.bind(this)}
       >
-        {this.state.clicked ? "" : this.props.value}
+        {this.state.clicked ? this.props.value : ""}
       </td>
     );
   }
