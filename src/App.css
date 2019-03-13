@@ -58,7 +58,7 @@ td {
 }
 
 p {
-  display: inline-block;
+  /* display: inline-block; */
   margin-left: 31%;
 }
 /* document.querySelector('#root > div > div > div') */

@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { rightClick, leftClick } from "../actions";
 import classNames from "classnames";
 
 class Cell extends Component {
@@ -37,11 +34,4 @@ class Cell extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ rightClick, leftClick }, dispatch);
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Cell);
+export default Cell;

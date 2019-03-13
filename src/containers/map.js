@@ -1,12 +1,19 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import {} from "../actions";
 import Cell from "./cell";
-
+import {
+  nestedArray,
+  populateNestedArray,
+  valsAdjacentCounts
+} from "../helpers";
 class Map extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      theMap: valsAdjacentCounts(
+        populateNestedArray(nestedArray(10, 10), "☀", 10),
+        "☀"
+      )
+    };
   }
 
   render() {
@@ -14,7 +21,7 @@ class Map extends Component {
       <div>
         <table>
           <tbody>
-            {this.props.theMap.map((item, row) => {
+            {this.state.theMap.map((item, row) => {
               return (
                 <tr key={row} className="mapRow">
                   {item.map((subitem, col) => {
@@ -32,16 +39,4 @@ class Map extends Component {
   }
 }
 
-function mapStateToProps({ theMap }) {
-  console.log(theMap, "MAP");
-  return { theMap };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Map);
+export default Map;
