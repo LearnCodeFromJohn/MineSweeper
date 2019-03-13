@@ -5,8 +5,12 @@ import "./App.css";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Map />
+      <div>
+        <div className="App">
+          <h1>MineSweeper</h1>
+          <Map className="map" />
+        </div>
+        <p>This is how you play minesweeper</p>
       </div>
     );
   }

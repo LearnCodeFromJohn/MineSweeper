@@ -7,13 +7,19 @@ import classNames from "classnames";
 class Cell extends Component {
   constructor(props) {
     super(props);
+    this.state = { clicked: false };
   }
-  handleClick() {}
+  componentDidMount() {
+    // console.log(this.props);
+    // let { value } = this.props;
+  }
+  handleClick() {
+    this.setState({ clicked: true });
+  }
   onContextMenu(e) {}
   render() {
     let cellsClass = classNames({
-      cell: true,
-      clicked: this.props.clicked
+      cell: true
     });
     if (this.props.image !== undefined) {
       const images = "./src/static/images";
@@ -33,7 +39,7 @@ class Cell extends Component {
       let top = 50 + this.props.row * 25 + "px";
       let left = 500 + 25 * this.props.column + "px";
       var divStyle = {
-        backgroundImage: `url(${images}/${map_images[this.props.image]}.png)`,
+        // backgroundImage: `url(${images}/${map_images[this.props.image]}.png)`,
         top,
         left
       };
@@ -45,7 +51,7 @@ class Cell extends Component {
         onClick={this.handleClick.bind(this)}
         onContextMenu={this.onContextMenu.bind(this)}
       >
-        X
+        {this.state.clicked ? "" : this.props.value}
       </td>
     );
   }
