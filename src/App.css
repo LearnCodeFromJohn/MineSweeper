@@ -40,6 +40,7 @@ table {
 }
 
 td {
+  background-color: green;
   border-bottom: 4px solid grey;
   border-right: 4px solid grey;
   border-top: 4px solid lightgray;
@@ -62,3 +63,9 @@ p {
   margin-left: 31%;
 }
 /* document.querySelector('#root > div > div > div') */
+
+.bomb {
+  color: rgb(216, 0, 0) !important;
+  font-size: 30px;
+  padding: 0px;
+}

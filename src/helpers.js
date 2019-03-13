@@ -53,3 +53,8 @@ function addOneNestedArrAdjacents(nestedArray, i, j, val) {
   }
   return nestedArray;
 }
+
+chanceIt();
+function chanceIt(probability) {
+  return Math.random() > probability;
+}
