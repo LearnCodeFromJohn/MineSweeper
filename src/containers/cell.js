@@ -6,44 +6,42 @@ let endMineSweeperGame = false;
 class Cell extends Component {
   constructor(props) {
     super(props);
-    this.state = { clicked: false };
+    this.state = { clicked: false, flag: "" };
   }
   handleClick(e) {
+    let { row, column, cellsClicked } = this.props;
     if (!this.state.flag) this.setState({ clicked: true });
-    let { row, column } = this.props;
-    //recursion cases
-    if (
-      this.props.value === "" &&
-      e.target.id === `${row}_${column}` &&
-      !endMineSweeperGame
-    ) {
-      e.target.id = `${row}_${column}_`;
-      let rowList = [row - 1, row, row + 1];
-      let colList = [column - 1, column, column + 1];
-      for (let i of rowList) {
-        for (let j of colList) {
-          if (document.getElementById(`${i}_${j}`)) {
-            setImmediate(() => {
-              if (document.getElementById(`${i}_${j}`))
-                document.getElementById(`${i}_${j}`).click();
-            });
+    if (!endMineSweeperGame) {
+      if (!this.state.clicked) cellsClicked();
+      //recursion cases
+      if (this.props.value === "" && e.target.id === `${row}_${column}`) {
+        e.target.id = `${row}_${column}_`;
+        let rowList = [row - 1, row, row + 1];
+        let colList = [column - 1, column, column + 1];
+        for (let i of rowList) {
+          for (let j of colList) {
+            if (document.getElementById(`${i}_${j}`)) {
+              setImmediate(() => {
+                if (document.getElementById(`${i}_${j}`))
+                  document.getElementById(`${i}_${j}`).click();
+              });
+            }
           }
         }
       }
-    }
-    //end game
-    if (this.props.value === "☀" && !endMineSweeperGame) {
-      endMineSweeperGame = true;
-      e.target.style.backgroundColor = "black";
-      let cols = e.target.parentElement.children.length;
-      let rows = e.target.parentElement.parentElement.children.length;
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-          //   console.log(document.getElementById(`${i}_${j}`));
-          if (document.getElementById(`${i}_${j}`))
-            document.getElementById(`${i}_${j}`).click();
-          if (document.getElementById(`${i}_${j}_`))
-            document.getElementById(`${i}_${j}_`).click();
+      //click bomb scenario --> end game
+      if (this.props.value === "☀") {
+        endMineSweeperGame = true;
+        e.target.style.backgroundColor = "black";
+        let cols = e.target.parentElement.children.length;
+        let rows = e.target.parentElement.parentElement.children.length;
+        for (let i = 0; i < rows; i++) {
+          for (let j = 0; j < cols; j++) {
+            if (document.getElementById(`${i}_${j}`))
+              document.getElementById(`${i}_${j}`).click();
+            if (document.getElementById(`${i}_${j}_`))
+              document.getElementById(`${i}_${j}_`).click();
+          }
         }
       }
     }
