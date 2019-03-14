@@ -1,5 +1,5 @@
 {
-  "main.css": "/MineSweeper/static/css/main.d49d32eb.chunk.css",
+  "main.css": "/MineSweeper/static/css/main.55ff04af.chunk.css",
   "main.js": "/MineSweeper/static/js/main.6f4fe07a.chunk.js",
   "main.js.map": "/MineSweeper/static/js/main.6f4fe07a.chunk.js.map",
   "runtime~main.js": "/MineSweeper/static/js/runtime~main.f1c351cb.js",
@@ -7,7 +7,7 @@
   "static/js/2.346e71ad.chunk.js": "/MineSweeper/static/js/2.346e71ad.chunk.js",
   "static/js/2.346e71ad.chunk.js.map": "/MineSweeper/static/js/2.346e71ad.chunk.js.map",
   "index.html": "/MineSweeper/index.html",
-  "precache-manifest.bad265e91da05c2913a597d7ccf5d340.js": "/MineSweeper/precache-manifest.bad265e91da05c2913a597d7ccf5d340.js",
+  "precache-manifest.2ed159d2f309056dc20c361ecce0b212.js": "/MineSweeper/precache-manifest.2ed159d2f309056dc20c361ecce0b212.js",
   "service-worker.js": "/MineSweeper/service-worker.js",
-  "static/css/main.d49d32eb.chunk.css.map": "/MineSweeper/static/css/main.d49d32eb.chunk.css.map"
+  "static/css/main.55ff04af.chunk.css.map": "/MineSweeper/static/css/main.55ff04af.chunk.css.map"
 }
