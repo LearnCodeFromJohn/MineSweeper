@@ -1,9 +1,9 @@
 // @flow
 
 export function nestedArray(row: number, col: number) {
-  let outerArray: Array<mixed> = [];
+  let outerArray: Array<Array<number | string>> = [];
   for (let i = 0; i < row; i++) {
-    let innerArray: Array<mixed> = [];
+    let innerArray: Array<number | string> = [];
     for (let j = 0; j < col; j++) {
       innerArray.push("");
     }
@@ -13,7 +13,7 @@ export function nestedArray(row: number, col: number) {
 }
 
 export function populateNestedArray(
-  nestedArray: Array<mixed[]>,
+  nestedArray: Array<Array<number | string>>,
   val: string | number,
   count: number
 ) {
@@ -29,7 +29,7 @@ export function populateNestedArray(
 }
 
 export function valsAdjacentCounts(
-  nestedArray: Array<mixed[]>,
+  nestedArray: Array<Array<number | string>>,
   val: string | number
 ) {
   for (let i = 0; i < nestedArray.length; i++) {
@@ -47,7 +47,7 @@ function floorRand(scale: number) {
 }
 
 function addOneNestedArrAdjacents(
-  nestedArray: Array<mixed[]>,
+  nestedArray: Array<Array<number | string>>,
   i: number,
   j: number,
   val: string | number

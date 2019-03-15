@@ -1,21 +1,33 @@
+// @flow__ <---Ignoring>
+
 import React, { Component } from "react";
 import classNames from "classnames";
 
+type Props = {
+  row: number,
+  column: number,
+  value: string | number,
+  cellsClicked: Function
+};
+type State = {
+  clicked: boolean,
+  flag: string
+};
 let endMineSweeperGame = false;
 
-class Cell extends Component {
-  constructor(props) {
+class Cell extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { clicked: false, flag: "" };
   }
-  handleClick(e) {
+  handleClick({ target }: SyntheticMouseEvent<>) {
     let { row, column, cellsClicked } = this.props;
     if (!this.state.flag) this.setState({ clicked: true });
     if (!this.state.clicked) cellsClicked();
     if (!endMineSweeperGame) {
       //recursion cases
-      if (this.props.value === "" && e.target.id === `${row}_${column}`) {
-        e.target.id = `${row}_${column}_`;
+      if (this.props.value === "" && target.id === `${row}_${column}`) {
+        target.id = `${row}_${column}_`;
         let rowList = [row - 1, row, row + 1];
         let colList = [column - 1, column, column + 1];
         for (let i of rowList) {
@@ -30,9 +42,9 @@ class Cell extends Component {
       //click bomb scenario --> end game
       if (this.props.value === "☀" && !this.state.flag) {
         endMineSweeperGame = true;
-        e.target.style.backgroundColor = "black";
-        let cols = e.target.parentElement.children.length;
-        let rows = e.target.parentElement.parentElement.children.length;
+        target.style.backgroundColor = "black";
+        let cols = target.parentElement.children.length;
+        let rows = target.parentElement.parentElement.children.length;
         for (let i = 0; i < rows; i++) {
           for (let j = 0; j < cols; j++) {
             if (document.getElementById(`${i}_${j}`))
@@ -42,7 +54,7 @@ class Cell extends Component {
       }
     }
   }
-  handleContextMenu(e) {
+  handleContextMenu(e: SyntheticMouseEvent<>) {
     e.preventDefault();
     if (!this.state.clicked) {
       this.state.flag
