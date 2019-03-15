@@ -8,9 +8,16 @@ import {
 class Map extends Component {
   constructor(props) {
     super(props);
+    this.mapSize = 10;
+    this.bombCount = 10;
+    //this could be composed
     this.state = {
       theMap: valsAdjacentCounts(
-        populateNestedArray(nestedArray(10, 10), "☀", 10),
+        populateNestedArray(
+          nestedArray(this.mapSize, this.mapSize),
+          "☀",
+          this.bombCount
+        ),
         "☀"
       ),
       cellsClicked: 0
@@ -18,8 +25,9 @@ class Map extends Component {
   }
 
   handleCellsClicked() {
+    let safeCells = this.mapSize * this.mapSize - this.bombCount;
     this.setState({ cellsClicked: ++this.state.cellsClicked });
-    if (this.state.cellsClicked >= 90) alert("You have won!");
+    if (this.state.cellsClicked >= safeCells) alert("☀☀☀ You have won! ☀☀☀");
   }
   render() {
     return (

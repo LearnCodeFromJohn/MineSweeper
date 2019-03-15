@@ -59,10 +59,8 @@ td {
 }
 
 p {
-  /* display: inline-block; */
   margin-left: 31%;
 }
-/* document.querySelector('#root > div > div > div') */
 
 .bomb.clicked {
   color: rgb(216, 0, 0) !important;

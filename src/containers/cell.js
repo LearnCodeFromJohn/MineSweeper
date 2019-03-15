@@ -11,8 +11,8 @@ class Cell extends Component {
   handleClick(e) {
     let { row, column, cellsClicked } = this.props;
     if (!this.state.flag) this.setState({ clicked: true });
+    if (!this.state.clicked) cellsClicked();
     if (!endMineSweeperGame) {
-      if (!this.state.clicked) cellsClicked();
       //recursion cases
       if (this.props.value === "" && e.target.id === `${row}_${column}`) {
         e.target.id = `${row}_${column}_`;
@@ -20,17 +20,15 @@ class Cell extends Component {
         let colList = [column - 1, column, column + 1];
         for (let i of rowList) {
           for (let j of colList) {
-            if (document.getElementById(`${i}_${j}`)) {
-              setImmediate(() => {
-                if (document.getElementById(`${i}_${j}`))
-                  document.getElementById(`${i}_${j}`).click();
-              });
-            }
+            setImmediate(() => {
+              if (document.getElementById(`${i}_${j}`))
+                document.getElementById(`${i}_${j}`).click();
+            });
           }
         }
       }
       //click bomb scenario --> end game
-      if (this.props.value === "☀") {
+      if (this.props.value === "☀" && !this.state.flag) {
         endMineSweeperGame = true;
         e.target.style.backgroundColor = "black";
         let cols = e.target.parentElement.children.length;
@@ -39,8 +37,6 @@ class Cell extends Component {
           for (let j = 0; j < cols; j++) {
             if (document.getElementById(`${i}_${j}`))
               document.getElementById(`${i}_${j}`).click();
-            if (document.getElementById(`${i}_${j}_`))
-              document.getElementById(`${i}_${j}_`).click();
           }
         }
       }
@@ -49,8 +45,9 @@ class Cell extends Component {
   handleContextMenu(e) {
     e.preventDefault();
     if (!this.state.clicked) {
-      if (!this.state.flag) this.setState({ flag: "⚑" });
-      else this.setState({ flag: "" });
+      this.state.flag
+        ? this.setState({ flag: "" })
+        : this.setState({ flag: "⚑" });
     }
   }
   render() {

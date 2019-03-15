@@ -1,7 +1,7 @@
-export function nestedArray(row, col) {
-  let outerArray = [];
+export function nestedArray(row: Number, col: Number) {
+  let outerArray: String[] = [];
   for (let i = 0; i < row; i++) {
-    let innerArray = [];
+    let innerArray: String[] = [];
     for (let j = 0; j < col; j++) {
       innerArray.push("");
     }
