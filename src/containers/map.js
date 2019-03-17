@@ -40,6 +40,7 @@ class Map extends Component<Props, State> {
     });
     if (cellsClicked >= safeCells) alert("☀☀☀ You have won! ☀☀☀");
   }
+
   render() {
     return (
       <div>
