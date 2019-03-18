@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Map from "./containers/map";
+import Map3D from "./containers/3dMap";
 import "./App.css";
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
       <div>
         <div className="App">
           <br />
-          <Map className="map" />
+          <Map3D className="map" />
         </div>
         <p>How to play minesweeper: (Play on Chrome)</p>
         <p>1) The goal of the game is to NOT click any bombs</p>
