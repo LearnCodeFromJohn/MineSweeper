@@ -1,5 +1,3 @@
-// @flow__ <---Ignoring>
-
 import React, { Component } from "react";
 import classNames from "classnames";
 
@@ -13,12 +11,12 @@ type State = {
   clicked: boolean,
   flag: string
 };
-let endMineSweeperGame = false;
+// let endMineSweeperGame = false;
 
 export default class CubeCell extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { clicked: false, flag: "" };
+    this.state = { clicked: true, flag: "" };
   }
   handleClick({ target }: SyntheticMouseEvent<>) {
     this.setState({ clicked: true });

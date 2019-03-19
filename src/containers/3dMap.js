@@ -2,7 +2,9 @@
 
 import React, { Component } from "react";
 import CubeCell from "./cubeCell";
-import { Arr3D, populateArr3D, AdjCounts3D } from "../helpers";
+import ArrowPad from "./arrowPad";
+import { Arr3D, populateArr3D, AdjCounts3D } from "../helpers/cubeMap";
+import { rotateRight } from "../helpers/copyCube";
 
 type Props = {};
 type State = {
@@ -31,29 +33,43 @@ export default class Map3D extends Component<Props, State> {
     };
   }
 
-  handleCellsClicked() {}
+  arrowPad(arrow) {
+    if (arrow === "right")
+      this.setState({ theCube: rotateRight(this.state.theCube) });
+    // else if (arrow === "left")
+    // else if (arrow === "up")
+    // else if (arrow === "down")
+  }
 
   render() {
     let { theCube } = this.state;
     return (
-      <div>
-        {theCube.map((yArr, x) => {
-          return (
-            <table key={x}>
-              <tbody>
-                {yArr.map((zArr, y) => {
-                  return (
-                    <tr key={y} className="cubeRow">
-                      {zArr.map((val, z) => {
-                        return <CubeCell key={z} x={x} y={y} z={z} val={val} />;
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          );
-        })}
+      <div className="container">
+        <div className="row">
+          {theCube.map((yArr, x) => {
+            return (
+              <div key={x} className="col-sm-4 tableCol">
+                <table className="table table-bordered">
+                  <tbody>
+                    {yArr.map((zArr, y) => {
+                      return (
+                        <tr key={y} className="cubeRow">
+                          {zArr.map((val, z) => {
+                            return (
+                              <CubeCell key={z} x={x} y={y} z={z} val={val} />
+                            );
+                          })}
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
+        </div>
+
+        <ArrowPad arrowPad={this.arrowPad.bind(this)} />
       </div>
     );
   }
