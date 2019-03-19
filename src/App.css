@@ -34,20 +34,33 @@
 
 
 table {
-  display: block;
+  display: inline-block;
   border-collapse: separate;
   border-spacing: 0px;
+  /*width: 300px;*/
   /*transform: rotateX(80deg);*/
   /*transform: rotateY(70deg);*/
   /*transform: rotateZ(90deg);*/
-  /*transform: translateX(30px);*/
+  /*transform: transform(30px);*/
+  /*transform: translateY(30px);*/
+  /*transform: scale3d(2,2,2);*/
+  /*opacity: .6;*/
+}
+
+.table1 {
+  display: none;
+}
+.table2 {
+  display: none;
+}
+.table3 {
+  display: none;
 }
 
 .tableCol {
   margin: 0px;
   padding: 0px;
 }
-
 td {
   background-color: rgb(68, 122, 68);
   border-bottom: 4px solid grey;
@@ -55,22 +68,18 @@ td {
   border-top: 4px solid lightgray;
   border-left: 4px solid lightgray;
 }
-
 .cell {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   font-size: 20px;
 }
-
 .clicked {
   background-color: grey;
   border: 4px solid darkgrey !important;
 }
-
 p {
   margin-left: 31%;
 }
-
 .bomb.clicked {
   color: rgb(216, 0, 0) !important;
   font-size: 30px;

@@ -1,6 +1,9 @@
 import { Arr3D } from "./cubeMap";
 
-export function rotateRight(OCube: Array<Array<Array<number | string>>>) {
+export function rotateCube(
+  OCube: Array<Array<Array<number | string>>>,
+  direction: string
+) {
   let newCube: Array<Array<Array<number | string>>>;
   let x = OCube.length;
   let y = OCube[0].length;
@@ -12,25 +15,27 @@ export function rotateRight(OCube: Array<Array<Array<number | string>>>) {
   for (let i = 0; i < x; i++) {
     for (let j = 0; j < y; j++) {
       for (let k = 0; k < z; k++) {
-        let new_i = OCube.length - k - 1;
         // console.log(i, j, k);
         // console.log(new_i, j, i);
         // console.log("----------");
-        newCube[new_i][j][i] = OCube[i][j][k];
+        if (direction === "right") {
+          let new_i = x - k - 1;
+          newCube[new_i][j][i] = OCube[i][j][k];
+        } else if (direction === "left") {
+          let new_k = x - i - 1;
+          newCube[k][j][new_k] = OCube[i][j][k];
+        } else if (direction === "up") {
+          let new_i = x - j - 1;
+          newCube[new_i][i][k] = OCube[i][j][k];
+        } else if (direction === "down") {
+          let new_j = x - i - 1;
+          newCube[j][new_j][k] = OCube[i][j][k];
+        }
       }
     }
   }
   return newCube;
 }
-// export function rotateLeft(cube: Array<Array<Array<number | string>>>) {
-//   let newCube: Array<Array<Array<number | string>>> = [];
-// }
-// export function rotateDown(cube: Array<Array<Array<number | string>>>) {
-//   let newCube: Array<Array<Array<number | string>>> = [];
-// }
-// export function rotateUp(cube: Array<Array<Array<number | string>>>) {
-//   let newCube: Array<Array<Array<number | string>>> = [];
-// }
 
 // function queueWrap() {
 //   let storage = [];
