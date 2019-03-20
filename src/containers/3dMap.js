@@ -5,6 +5,7 @@ import CubeCell from "./cubeCell";
 import ArrowPad from "./arrowPad";
 import { Arr3D, populateArr3D, AdjCounts3D } from "../helpers/cubeMap";
 import { rotateCube } from "../helpers/copyCube";
+import { truncate } from "fs";
 
 type Props = {};
 type State = {
@@ -12,7 +13,8 @@ type State = {
   bombCount: number,
   bombVal: string,
   theCube: Array<Array<Array<number | string>>>,
-  cellsClicked: number
+  cellsClicked: number,
+  clickedMap: Object
 };
 
 export default class Map3D extends Component<Props, State> {
@@ -37,19 +39,40 @@ export default class Map3D extends Component<Props, State> {
     this.setState({ theCube: rotateCube(this.state.theCube, arrow) });
   }
 
+  click(x, y, z) {
+    if (this.state.theCube[x][y][z] < 10) {
+      this.state.theCube[x][y][z] += 10;
+      this.setState({ theCube: this.state.theCube });
+    } else if (this.state.theCube[x][y][z] === "☀") {
+      this.state.theCube[x][y][z] += "☀";
+      this.setState({ theCube: this.state.theCube });
+    }
+  }
+
   render() {
-    let { theCube } = this.state;
+    let {
+      state: { theCube }
+    } = this;
     return (
       <div>
         {theCube.map((yArr, x) => {
           return (
-            <table className={"table table-bordered" + " table" + x}>
+            <table key={x} className={"table table-bordered" + " table" + x}>
               <tbody>
                 {yArr.map((zArr, y) => {
                   return (
                     <tr key={y} className="cubeRow">
                       {zArr.map((val, z) => {
-                        return <CubeCell key={z} x={x} y={y} z={z} val={val} />;
+                        return (
+                          <CubeCell
+                            click={this.click.bind(this)}
+                            key={z}
+                            x={x}
+                            y={y}
+                            z={z}
+                            val={val}
+                          />
+                        );
                       })}
                     </tr>
                   );

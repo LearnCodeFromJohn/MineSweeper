@@ -30,22 +30,22 @@ export default class ArrowPad extends Component<Props, State> {
   render() {
     return (
       <div>
-        <table>
+        <table className="arrowPad">
           <tbody>
             <tr>
-              <td />
+              <td className="hidden" />
               <td onClick={this.upArrow.bind(this)}> ↑ </td>
-              <td />
+              <td className="hidden" />
             </tr>
             <tr>
               <td onClick={this.leftArrow.bind(this)}> ← </td>
-              <td />
+              <td className="arrowPadMid"> </td>
               <td onClick={this.rightArrow.bind(this)}> → </td>
             </tr>
             <tr>
-              <td />
+              <td className="hidden" />
               <td onClick={this.downArrow.bind(this)}> ↓ </td>
-              <td />
+              <td className="hidden" />
             </tr>
           </tbody>
         </table>

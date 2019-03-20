@@ -56,7 +56,21 @@ table {
 .table3 {
   display: none;
 }
-
+.arrowPad {
+  margin-top: 20px;
+}
+.arrowPad > tbody > tr > td {
+  background: darkgrey;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-top: 2px solid lightgray;
+  border-left: 2px solid lightgray;
+  width: 40px;
+  height: 40px;
+}
+/*.arrowPadMid {
+  border: none !important;
+}*/
 .tableCol {
   margin: 0px;
   padding: 0px;
@@ -84,4 +98,7 @@ p {
   color: rgb(216, 0, 0) !important;
   font-size: 30px;
   padding: 0px;
+}
+.hidden {
+  visibility: hidden;
 }
