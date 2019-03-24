@@ -4,12 +4,20 @@ import "./App.css";
 
 class App extends Component {
   render() {
+    const widthStyle = {
+      width: "800px"
+    };
     return (
-      <div>
+      <div style={widthStyle}>
         <div className="App">
           <br />
           <Map className="map" />
         </div>
+        <p>
+          <a href="https://www.facebook.com/Learn-to-think-like-a-dev-542566672900463">
+            Learn to Think like a Dev
+          </a>
+        </p>
         <p>How to play minesweeper: (Play on Chrome)</p>
         <p>1) The goal of the game is to NOT click any bombs</p>
         <p>
