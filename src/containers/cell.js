@@ -1,5 +1,3 @@
-// @flow__ <---Ignoring>
-
 import React, { Component } from "react";
 import classNames from "classnames";
 
@@ -21,53 +19,32 @@ class Cell extends Component<Props, State> {
     this.state = { clicked: false, flag: "" };
   }
   handleClick({ target }: SyntheticMouseEvent<>) {
-    let { row, column, cellsClicked } = this.props;
-    if (!this.state.flag) this.setState({ clicked: true });
-    if (!this.state.clicked) cellsClicked();
+    let { row, column, cellsClicked, value } = this.props;
+    let { clicked, flag } = this.state;
+    if (!flag) this.setState({ clicked: true });
+    if (!clicked) cellsClicked();
     if (!endMineSweeperGame) {
-      //recursion cases
-      if (this.props.value === "" && target.id === `${row}_${column}`) {
-        target.id = `${row}_${column}_`;
-        let rowList = [row - 1, row, row + 1];
-        let colList = [column - 1, column, column + 1];
-        for (let i of rowList) {
-          for (let j of colList) {
-            setImmediate(() => {
-              if (document.getElementById(`${i}_${j}`))
-                document.getElementById(`${i}_${j}`).click();
-            });
-          }
-        }
-      }
+      // Empty cell click --> recursion
+      if (value === "" && target.id === `${row}_${column}`)
+        recursionClick(target, row, column);
       //click bomb scenario --> end game
-      if (this.props.value === "☀" && !this.state.flag) {
-        endMineSweeperGame = true;
-        target.style.backgroundColor = "black";
-        let cols = target.parentElement.children.length;
-        let rows = target.parentElement.parentElement.children.length;
-        for (let i = 0; i < rows; i++) {
-          for (let j = 0; j < cols; j++) {
-            if (document.getElementById(`${i}_${j}`))
-              document.getElementById(`${i}_${j}`).click();
-          }
-        }
-      }
+      if (value === "☀" && !flag) endGame(target);
     }
   }
   handleContextMenu(e: SyntheticMouseEvent<>) {
     e.preventDefault();
-    if (!this.state.clicked) {
-      this.state.flag
-        ? this.setState({ flag: "" })
-        : this.setState({ flag: "⚑" });
+    let { clicked, flag } = this.state;
+    if (!clicked) {
+      flag ? this.setState({ flag: "" }) : this.setState({ flag: "⚑" });
     }
   }
   render() {
-    let { row, column } = this.props;
+    let { row, column, value } = this.props;
+    let { clicked, flag } = this.state;
     let cellsClass = classNames({
       cell: true,
-      clicked: this.state.clicked,
-      bomb: this.props.value === "☀"
+      clicked,
+      bomb: value === "☀"
     });
     return (
       <td
@@ -76,11 +53,40 @@ class Cell extends Component<Props, State> {
         onClick={this.handleClick.bind(this)}
         onContextMenu={this.handleContextMenu.bind(this)}
       >
-        {this.state.clicked && !this.state.flag ? this.props.value : ""}
-        {this.state.flag}
+        {clicked && !flag ? value : ""}
+        {flag}
       </td>
     );
   }
 }
 
 export default Cell;
+
+function recursionClick(target, row, column) {
+  target.id = `${row}_${column}_`;
+  let rowList = [row - 1, row, row + 1];
+  let colList = [column - 1, column, column + 1];
+  for (let i of rowList) {
+    for (let j of colList) {
+      setImmediate(() => {
+        if (document.getElementById(`${i}_${j}`))
+          document.getElementById(`${i}_${j}`).click();
+      });
+    }
+  }
+  return;
+}
+
+function endGame(target) {
+  endMineSweeperGame = true;
+  target.style.backgroundColor = "black";
+  let cols = target.parentElement.children.length;
+  let rows = target.parentElement.parentElement.children.length;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (document.getElementById(`${i}_${j}`))
+        document.getElementById(`${i}_${j}`).click();
+    }
+  }
+  return;
+}
