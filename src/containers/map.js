@@ -32,7 +32,7 @@ class Map extends Component<Props, State> {
     };
   }
 
-  handleCellsClicked() {
+  incCellsClicked() {
     let { mapSize, bombCount, cellsClicked } = this.state;
     let safeCells = mapSize * mapSize - bombCount;
     this.setState({
@@ -56,7 +56,7 @@ class Map extends Component<Props, State> {
                         row={row}
                         column={col}
                         value={subitem}
-                        cellsClicked={this.handleCellsClicked.bind(this)}
+                        incCellsClicked={this.incCellsClicked.bind(this)}
                       />
                     );
                   })}

@@ -19,10 +19,10 @@ class Cell extends Component<Props, State> {
     this.state = { clicked: false, flag: "" };
   }
   handleClick({ target }: SyntheticMouseEvent<>) {
-    let { row, column, cellsClicked, value } = this.props;
+    let { row, column, incCellsClicked, value } = this.props;
     let { clicked, flag } = this.state;
     if (!flag) this.setState({ clicked: true });
-    if (!clicked) cellsClicked();
+    if (!clicked) incCellsClicked();
     if (!endMineSweeperGame) {
       // Empty cell click --> recursion
       if (value === "" && target.id === `${row}_${column}`)
@@ -34,9 +34,8 @@ class Cell extends Component<Props, State> {
   handleContextMenu(e: SyntheticMouseEvent<>) {
     e.preventDefault();
     let { clicked, flag } = this.state;
-    if (!clicked) {
+    if (!clicked)
       flag ? this.setState({ flag: "" }) : this.setState({ flag: "⚑" });
-    }
   }
   render() {
     let { row, column, value } = this.props;
